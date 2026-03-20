@@ -8,4 +8,14 @@
     <a href="#">Gallery</a>
     <a href="#">Login</a>
 
+<?php if (isset($_SESSION['user_name'])) { ?>
+
+    Welcome, <?php echo $_SESSION['user_name']; ?>
+
+<?php } else { ?>
+
+    <a href="/alumni_v2/modules/auth/login.php">Login</a>
+
+<?php } ?>
+
 </div>
