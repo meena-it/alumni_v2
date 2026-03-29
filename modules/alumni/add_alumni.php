@@ -20,7 +20,8 @@ if (isset($_POST['submit'])) {
               VALUES ('$user_id', '$name', '$email', '$course', '$batch', '$job')";
 
     if (mysqli_query($conn, $query)) {
-        echo "Alumni added successfully";
+        header("Location: alumni_list.php?success=1");
+        exit();
     } else {
         echo "Error: " . mysqli_error($conn);
     }

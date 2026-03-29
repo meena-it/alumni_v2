@@ -7,6 +7,12 @@
 $result = mysqli_query($conn, $query);
 ?>
 <a href="add_alumni.php">Add Alumni</a><br><br>
+
+<?php if(isset($_GET['success'])) {
+    ?>
+    <p style="color:green;">Alumni added successfully</p>
+<?php } ?>
+
 <table border="1" cellpadding="10">
     <tr>
         <th>Name</th>
