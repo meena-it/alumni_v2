@@ -6,7 +6,6 @@
     <a href="#">Jobs</a>
     <a href="#">Events</a>
     <a href="#">Gallery</a>
-    <a href="#">Login</a>
 
     <?php if (isset($_SESSION['user_name'])) { ?>
 
@@ -16,7 +15,8 @@
 
     <?php } else { ?>
 
-        <a href="/alumni_v2/modules/auth/login.php">Login</a>
+        <a href="/alumni_v2/modules/auth/login.php">Login</a>|
+        <a href="/alumni_v2/modules/auth/signup.php">Signup</a>
 
     <?php } ?>
 
