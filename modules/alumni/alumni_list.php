@@ -8,10 +8,15 @@ $result = mysqli_query($conn, $query);
 ?>
 <a href="add_alumni.php">Add Alumni</a><br><br>
 
-<?php if(isset($_GET['success'])) {
-    ?>
+<?php if (isset($_GET['success'])) {
+?>
     <p style="color:green;">Alumni added successfully</p>
 <?php } ?>
+
+<?php if (isset($_GET['updated'])) { ?>
+    <p style="color:blue;">Alumni updated successfully</p>
+<?php } ?>
+
 
 <table border="1" cellpadding="10">
     <tr>
@@ -20,6 +25,7 @@ $result = mysqli_query($conn, $query);
         <th>Course</th>
         <th>Batch</th>
         <th>Job</th>
+        <th>Action</th>
     </tr>
     <?php while ($row = mysqli_fetch_assoc($result)) { ?>
         <tr>
@@ -28,6 +34,7 @@ $result = mysqli_query($conn, $query);
             <td><?php echo $row['course']; ?></td>
             <td><?php echo $row['batch']; ?></td>
             <td><?php echo $row['job']; ?></td>
+            <td><a href="edit_alumni.php?id=<?php echo $row['id']; ?>">Edit</a></td>
         </tr>
     <?php } ?>
 
