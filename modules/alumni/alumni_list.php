@@ -17,6 +17,10 @@ $result = mysqli_query($conn, $query);
     <p style="color:blue;">Alumni updated successfully</p>
 <?php } ?>
 
+<?php if (isset($_GET['deleted'])) { ?>
+    <p style="color:red;">Alumni deleted successfully</p>
+<?php } ?>
+
 
 <table border="1" cellpadding="10">
     <tr>
@@ -34,7 +38,9 @@ $result = mysqli_query($conn, $query);
             <td><?php echo $row['course']; ?></td>
             <td><?php echo $row['batch']; ?></td>
             <td><?php echo $row['job']; ?></td>
-            <td><a href="edit_alumni.php?id=<?php echo $row['id']; ?>">Edit</a></td>
+            <td><a href="edit_alumni.php?id=<?php echo $row['id']; ?>">Edit</a>
+            <a href="delete_alumni.php?id=<?php echo $row['id']; ?>"
+                onclick="return confirm('Are you sure you want to to delete this record?');">Delete</a></td>
         </tr>
     <?php } ?>
 
