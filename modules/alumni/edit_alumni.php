@@ -6,9 +6,18 @@ include "../../config/database.php";
 <?php 
 $id = $_GET['id'];
 
-$query = "SELECT * FROM alumni WHERE id='$id'";
+$user_id = $_SESSION['user_id'];
+
+$query = "SELECT * FROM alumni WHERE id='$id' AND user_id='$user_id'";
+
 $result = mysqli_query($conn, $query);
 $row = mysqli_fetch_assoc($result);
+
+if (!$row) {
+    echo "Unauthorized access";
+    exit();
+}
+
 ?>
 
 <?php 
@@ -25,7 +34,7 @@ if (isset($_POST['update'])) {
                 course='$course',
                 batch='$batch',
                 job='$job'
-            WHERE id='$id'";
+            WHERE id='$id' AND user_id='$user_id'";
 
     if (mysqli_query($conn, $query)) {
         header("Location: alumni_list.php?updated=1");
