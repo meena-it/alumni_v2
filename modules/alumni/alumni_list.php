@@ -30,6 +30,7 @@ $result = mysqli_query($conn, $query);
         <th>Batch</th>
         <th>Job</th>
         <th>Action</th>
+        <th>View</th>
     </tr>
     <?php while ($row = mysqli_fetch_assoc($result)) { ?>
         <tr>
@@ -38,9 +39,12 @@ $result = mysqli_query($conn, $query);
             <td><?php echo $row['course']; ?></td>
             <td><?php echo $row['batch']; ?></td>
             <td><?php echo $row['job']; ?></td>
-            <td><a href="edit_alumni.php?id=<?php echo $row['id']; ?>">Edit</a>
-            <a href="delete_alumni.php?id=<?php echo $row['id']; ?>"
-                onclick="return confirm('Are you sure you want to to delete this record?');">Delete</a></td>
+            <td>
+                <a href="edit_alumni.php?id=<?php echo $row['id']; ?>">Edit</a>
+                <a href="delete_alumni.php?id=<?php echo $row['id']; ?>"
+                    onclick="return confirm('Are you sure you want to to delete this record?');">Delete</a>      
+            </td>
+            <td><a href="view_alumni.php?id=<?php echo $row['id']; ?>">View</a></td>
         </tr>
     <?php } ?>
 
