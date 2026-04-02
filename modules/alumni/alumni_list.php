@@ -10,11 +10,11 @@ $result = mysqli_query($conn, $query);
 
 <?php if (isset($_GET['success'])) {
 ?>
-    <p style="color:green;">Alumni added successfully</p>
+    <p class="success">Alumni added successfully</p>
 <?php } ?>
 
 <?php if (isset($_GET['updated'])) { ?>
-    <p style="color:blue;">Alumni updated successfully</p>
+    <p class="success">Alumni updated successfully</p>
 <?php } ?>
 
 <?php if (isset($_GET['deleted'])) { ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 include "../../includes/header.php";
 include "../../includes/auth_check.php";
 include "../../config/database.php";
@@ -18,17 +18,18 @@ if (!$row) {
 ?>
 
 <!-- <h2>Alumni Profile</h2> -->
- <?php if ($row['user_id'] == $_SESSION['user_id']) { ?>
-    <p><em>This is your profile</em></p>
-<?php } ?>
+<div class="profile">
+    <?php if ($row['user_id'] == $_SESSION['user_id']) { ?>
+        <p><em>This is your profile</em></p>
+    <?php } ?>
 
-<p><strong>Name:</strong> <?php echo $row['name']; ?></p>
-<p><strong>Email:</strong> <?php echo $row['email']; ?></p>
-<p><strong>Course:</strong> <?php echo $row['course']; ?></p>
-<p><strong>Batch:</strong> <?php echo $row['batch']; ?></p>
-<p><strong>Job:</strong> <?php echo $row['job']; ?></p>
+    <p><strong>Name:</strong> <?php echo $row['name']; ?></p>
+    <p><strong>Email:</strong> <?php echo $row['email']; ?></p>
+    <p><strong>Course:</strong> <?php echo $row['course']; ?></p>
+    <p><strong>Batch:</strong> <?php echo $row['batch']; ?></p>
+    <p><strong>Job:</strong> <?php echo $row['job']; ?></p>
 
-<br>
+    <br>
 
-<a href="alumni_list.php">Back to List</a>
-
+    <a href="alumni_list.php">Back to List</a>
+</div>
