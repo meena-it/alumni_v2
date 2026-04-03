@@ -3,9 +3,21 @@
 <?php include "../../config/database.php"; ?>
 <h2> Hi Alumni! </h2>
 
-<?php $query = "SELECT * FROM alumni ORDER BY id DESC";
+<?php
+/* $query = "SELECT * FROM alumni ORDER BY id DESC";
+$result = mysqli_query($conn, $query);
+ */?>
+
+<?php
+if (isset($_GET['search']) && $_GET['search'] != '') {
+    $search = $_GET['search'];
+    $query = "SELECT * FROM alumni WHERE name LIKE '%$search%' OR course LIKE '%$search%' ORDER BY id DESC"; 
+} else {
+    $query = "SELECT * FROM alumni ORDER BY id DESC";
+}
 $result = mysqli_query($conn, $query);
 ?>
+
 <a href="add_alumni.php">Add Alumni</a><br><br>
 
 <?php if (isset($_GET['success'])) {
@@ -21,6 +33,11 @@ $result = mysqli_query($conn, $query);
     <p style="color:red;">Alumni deleted successfully</p>
 <?php } ?>
 
+<form method="GET">
+    <input type="text" name="search"  placeholder="search by name or course" value="<?php echo $_GET['search'] ?? ''; ?>">
+    <button type="submit">Search</button>
+</form>
+<br>
 
 <table border="1" cellpadding="10">
     <tr>
@@ -42,7 +59,7 @@ $result = mysqli_query($conn, $query);
             <td>
                 <a href="edit_alumni.php?id=<?php echo $row['id']; ?>">Edit</a>
                 <a href="delete_alumni.php?id=<?php echo $row['id']; ?>"
-                    onclick="return confirm('Are you sure you want to to delete this record?');">Delete</a>      
+                    onclick="return confirm('Are you sure you want to to delete this record?');">Delete</a>
             </td>
             <td><a href="view_alumni.php?id=<?php echo $row['id']; ?>">View</a></td>
         </tr>
