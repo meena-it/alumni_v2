@@ -2,6 +2,12 @@
 include "../../includes/header.php";
 include "../../includes/auth_check.php";
 include "../../config/database.php";
+
+// 🔐 ROLE CHECK (ADD THIS)
+if ($_SESSION['role'] != 'admin') {
+    echo "Access denied";
+    exit();
+}
 ?>
 
 

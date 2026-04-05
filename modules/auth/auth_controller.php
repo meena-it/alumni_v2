@@ -13,9 +13,10 @@ if (isset($_POST['signup'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $role = "user";
 
-    $sql = "INSERT INTO users (name, email, password, role) VALUES ('$name', '$email', '$password', 'user')";
-
+    $sql = "INSERT INTO users (name, email, password, role) VALUES ('$name', '$email', '$password', '$role')";
+    
     if ($conn->query($sql) === TRUE) {
         echo "Signup successful";
     } else {
@@ -50,6 +51,7 @@ if (isset($_POST['login'])) {
 
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['name'];
+        $_SESSION['role']      = $row['role']; 
 
         header("Location: ../../index.php");
         exit();
