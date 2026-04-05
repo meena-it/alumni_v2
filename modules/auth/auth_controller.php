@@ -21,6 +21,18 @@ if (isset($_POST['signup'])) {
     } else {
         echo "Error: " . $conn->error;
     }
+
+    $user_id = mysqli_insert_id($conn);
+
+    $name  = $_POST['name'];
+$email = $_POST['email'];
+
+$alumni_query = "INSERT INTO alumni 
+                (user_id, name, email) 
+                VALUES ('$user_id', '$name', '$email')";
+
+mysqli_query($conn, $alumni_query);
+
 }
 
 //--------LOGIN-------
