@@ -4,18 +4,30 @@
 <h2> Hi Alumni! </h2>
 
 <?php
-/* $query = "SELECT * FROM alumni ORDER BY id DESC";
-$result = mysqli_query($conn, $query);
- */?>
+$limit = 5;
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$offset = ($page - 1) * $limit;
+?>
 
 <?php
 if (isset($_GET['search']) && $_GET['search'] != '') {
     $search = $_GET['search'];
-    $query = "SELECT * FROM alumni WHERE name LIKE '%$search%' OR course LIKE '%$search%' ORDER BY id DESC"; 
+
+    $query = "SELECT * FROM alumni WHERE name LIKE '%$search%' OR course LIKE '%$search%' ORDER BY id DESC LIMIT $limit OFFSET $offset";
+
+    $count_query = "SELECT COUNT(*) as total FROM alumni WHERE name LIKE '%$search%' OR course LIKE '%$search%'";
 } else {
-    $query = "SELECT * FROM alumni ORDER BY id DESC";
+    $query = "SELECT * FROM alumni ORDER BY id DESC LIMIT $limit OFFSET $offset";
+
+    $count_query = "SELECT COUNT(*) as total FROM alumni";
 }
+
 $result = mysqli_query($conn, $query);
+
+$count_result = mysqli_query($conn, $count_query);
+$total_rows = mysqli_fetch_assoc($count_result)['total'];
+
+$total_pages = ceil($total_rows / $limit);
 ?>
 
 <a href="add_alumni.php">Add Alumni</a><br><br>
@@ -64,6 +76,15 @@ $result = mysqli_query($conn, $query);
             <td><a href="view_alumni.php?id=<?php echo $row['id']; ?>">View</a></td>
         </tr>
     <?php } ?>
-
 </table>
+<div>
+    <?php for ($i = 1; $i <= $total_pages; $i++) { ?>
+
+        <a href="?page=<?php echo $i; ?>&search=<?php echo $_GET['search'] ?? ''; ?>">
+            <?php echo $i; ?>
+        </a>
+
+    <?php } ?>
+</div>
+
 <?php include "../../includes/footer.php"; ?>
