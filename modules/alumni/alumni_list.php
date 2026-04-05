@@ -34,7 +34,7 @@ $result = mysqli_query($conn, $query);
 <?php } ?>
 
 <form method="GET">
-    <input type="text" name="search"  placeholder="search by name or course" value="<?php echo $_GET['search'] ?? ''; ?>">
+    <input type="text" name="search" placeholder="search by name or course" value="<?php echo $_GET['search'] ?? ''; ?>">
     <button type="submit">Search</button>
 </form>
 <br>
