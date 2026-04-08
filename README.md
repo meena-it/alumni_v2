@@ -1,18 +1,29 @@
 # Alumni Management System
 
-A web-based alumni management system built using PHP and MySQL.
+A web-based Alumni Management System built using PHP and MySQL.
 
-## Features
-- User authentication (login/signup)
-- Alumni profile management
-- Pagination with search
-- Role-based access control (admin/user)
+## 🚀 Features
+- User Signup & Login (Authentication)
+- Alumni Profile Management
+- Pagination with Search
+- Role-Based Access Control (Admin/User)
 
-## Tech Stack
-- PHP
-- MySQL
-- HTML/CSS
-- JavaScript
+## 🛠️ Tech Stack
+- PHP (Backend)
+- MySQL (Database)
+- HTML, CSS, JavaScript (Frontend)
 
-## Author
+## 📂 Project Structure
+- modules/
+- includes/
+- config/
+- assets/
+
+## ⚙️ Setup Instructions
+1. Clone the repository
+2. Import database (schema.sql)
+3. Configure database connection
+4. Run on XAMPP
+
+## 👤 Author
 Meena
