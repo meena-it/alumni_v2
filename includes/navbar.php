@@ -9,13 +9,15 @@
 
     <?php if (isset($_SESSION['user_name'])) { ?>
 
-        Welcome, <?php echo $_SESSION['user_name']; ?>
+        <a href="/alumni_v2/modules/alumni/my_profile.php">My Profile</a>
+
+        <span>Welcome, <?php echo $_SESSION['user_name']; ?></span>
 
         <a href="/alumni_v2/modules/auth/logout.php">Logout</a>
 
     <?php } else { ?>
 
-        <a href="/alumni_v2/modules/auth/login.php">Login</a>|
+        <a href="/alumni_v2/modules/auth/login.php">Login</a>
         <a href="/alumni_v2/modules/auth/signup.php">Signup</a>
 
     <?php } ?>
