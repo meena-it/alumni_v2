@@ -58,3 +58,36 @@ a:hover {
     width: 400px;
     background: #fafafa;
 }
+
+.profile-container {
+    width: 50%;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.profile-card {
+    background: #f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.profile-card p {
+    font-size: 16px;
+    margin: 10px 10px;
+}
+
+.btn-edit{
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 15px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-edit:hover {
+    background: #0056b3;
+}
