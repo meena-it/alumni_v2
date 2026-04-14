@@ -24,6 +24,7 @@ CREATE TABLE alumni (
     batch VARCHAR(20),
     job VARCHAR(100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    profile_image VARCHAR(255),
 
     -- Foreign key (optional but good practice)
     FOREIGN KEY (user_id) REFERENCES users(id)

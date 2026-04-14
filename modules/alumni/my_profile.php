@@ -1,4 +1,4 @@
-<?php 
+<?php
 include "../../includes/header.php";
 include "../../includes/auth_check.php";
 include "../../config/database.php";
@@ -20,14 +20,22 @@ $alumni = mysqli_fetch_assoc($result);
 <a href="edit_alumni.php">Edit Profile</a> -->
 
 <div class="profile-container">
-    
+
     <h2>My Profile</h2>
     <div class="profile-card">
-        
-        <p><strong>Name:</strong> <?php echo $alumni['name']; ?></php>
+
+        <?php if (!empty($alumni['profile_image'])) { ?>
+            <img src="/alumni_v2/assets/uploads/<?php echo $alumni['profile_image']; ?>" width="120" style="border-radius: 50%" ;>
+        <?php } else { ?>
+            <img src="/alumni_v2/assets/uploads/default.png" width="120">
+        <?php } ?>
+
+
+        <p><strong>Name:</strong> <?php echo $alumni['name']; ?></p>
         <p><strong>Email:</strong> <?php echo $alumni['email']; ?></p>
         <p><strong>Course:</strong> <?php echo $alumni['course']; ?></p>
-        <p><strong>Batch:</strong> <?php echo $alumni['job']; ?></p>
+        <p><strong>Batch:</strong> <?php echo $alumni['batch']; ?></p>
+        <p><strong>Job:</strong> <?php echo $alumni['job']; ?></p>
 
         <a href="edit_alumni.php" class="btn-edit">Edit Profile</a>
 
