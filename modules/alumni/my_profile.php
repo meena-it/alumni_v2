@@ -37,7 +37,6 @@ $alumni = mysqli_fetch_assoc($result);
         <p><strong>Batch:</strong> <?php echo $alumni['batch']; ?></p>
         <p><strong>Job:</strong> <?php echo $alumni['job']; ?></p>
 
-        <a href="edit_alumni.php" class="btn-edit">Edit Profile</a>
-
+        <a href="edit_alumni.php?id=<?php echo $alumni['id']; ?>" class="btn-edit">Edit Profile</a>
     </div>
 </div>
