@@ -55,6 +55,20 @@ if (isset($_POST['update'])) {
 
     $folder = "../../assets/uploads/" . $filename;
 
+
+    $old_query = "SELECT profile_image FROM alumni WHERE id='$id' AND user_id='$user_id'";
+$old_result = mysqli_query($conn, $old_query);
+$old = mysqli_fetch_assoc($old_result);
+
+if (!empty($old['profile_image'])) {
+
+    $old_file = "../../assets/uploads/" . $old['profile_image'];
+
+    if (file_exists($old_file)) {
+        unlink($old_file);
+    }
+}
+
     move_uploaded_file($tempname, $folder);
 
     $query = "UPDATE alumni SET
