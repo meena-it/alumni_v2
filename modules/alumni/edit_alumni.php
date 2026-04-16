@@ -32,7 +32,9 @@ if (isset($_POST['update'])) {
     // IMAGE UPLOAD
     if (!empty($_FILES['profile_image']['name'])) {
 
-        $filename = $_FILES['profile_image']['name'];
+        // $filename = $_FILES['profile_image']['name'];
+        $ext = pathinfo($_FILES['profile_image']['name'], PATHINFO_EXTENSION);
+        $filename = time() . "_" . rand(1000, 9999) . "." . $ext;
         $tempname = $_FILES['profile_image']['tmp_name'];
 
         $folder = "../../assets/uploads/" . $filename;
@@ -58,7 +60,7 @@ if (isset($_POST['update'])) {
     }
 
     mysqli_query($conn, $query);
-    
+
     header("Location: alumni_list.php?updated=1");
     exit();
 }
