@@ -32,32 +32,50 @@ if (isset($_POST['update'])) {
     // IMAGE UPLOAD
     if (!empty($_FILES['profile_image']['name'])) {
 
-        // $filename = $_FILES['profile_image']['name'];
-        $ext = pathinfo($_FILES['profile_image']['name'], PATHINFO_EXTENSION);
-        $filename = time() . "_" . rand(1000, 9999) . "." . $ext;
-        $tempname = $_FILES['profile_image']['tmp_name'];
+    $allowed = ['jpg', 'jpeg', 'png', 'heic'];
 
-        $folder = "../../assets/uploads/" . $filename;
+    $original_name = $_FILES['profile_image']['name'];
+    $tempname      = $_FILES['profile_image']['tmp_name'];
+    $size          = $_FILES['profile_image']['size'];
 
-        move_uploaded_file($tempname, $folder);
+    $ext = strtolower(pathinfo($original_name, PATHINFO_EXTENSION));
 
-        $query = "UPDATE alumni SET 
-                    name='$name',
-                    email='$email',
-                    course='$course',
-                    batch='$batch',
-                    job='$job',
-                    profile_image='$filename'
-                  WHERE id='$id' AND user_id='$user_id'";
-    } else {
-        $query = "UPDATE alumni SET 
-                    name='$name',
-                    email='$email',
-                    course='$course',
-                    batch='$batch',
-                    job='$job'
-                  WHERE id='$id' AND user_id='$user_id'";
+    // Check extension
+    if (!in_array($ext, $allowed)) {
+        die("Only JPG, JPEG, PNG files allowed.");
     }
+
+    // Check size (2MB max)
+    if ($size > 1 * 1024 * 1024) {
+        die("File too large. Max 2MB.");
+    }
+
+    // Generate unique filename
+    $filename = time() . "_" . rand(1000,9999) . "." . $ext;
+
+    $folder = "../../assets/uploads/" . $filename;
+
+    move_uploaded_file($tempname, $folder);
+
+    $query = "UPDATE alumni SET
+                name='$name',
+                email='$email',
+                course='$course',
+                batch='$batch',
+                job='$job',
+                profile_image='$filename'
+              WHERE id='$id' AND user_id='$user_id'";
+
+} else {
+
+    $query = "UPDATE alumni SET
+                name='$name',
+                email='$email',
+                course='$course',
+                batch='$batch',
+                job='$job'
+              WHERE id='$id' AND user_id='$user_id'";
+}
 
     mysqli_query($conn, $query);
 
