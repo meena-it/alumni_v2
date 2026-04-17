@@ -60,7 +60,9 @@ if (isset($_POST['update'])) {
 $old_result = mysqli_query($conn, $old_query);
 $old = mysqli_fetch_assoc($old_result);
 
-if (!empty($old['profile_image'])) {
+//if (!empty($old['profile_image'])) {
+if (!empty($old['profile_image']) && $old['profile_image'] != 'default.png') {
+
 
     $old_file = "../../assets/uploads/" . $old['profile_image'];
 
