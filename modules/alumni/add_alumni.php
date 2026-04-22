@@ -2,6 +2,7 @@
 include "../../includes/header.php";
 include "../../includes/auth_check.php";
 include "../../config/database.php";
+include "../../includes/navbar.php";
 
 // 🔐 ROLE CHECK (ADD THIS)
 if ($_SESSION['role'] != 'admin') {

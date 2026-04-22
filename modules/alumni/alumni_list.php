@@ -1,6 +1,7 @@
 <?php include "../../includes/header.php"; ?>
 <?php include "../../includes/auth_check.php"; ?>
 <?php include "../../config/database.php"; ?>
+<?php include "../../includes/navbar.php"; ?>
 <h2> Hi Alumni! </h2>
 
 <?php
@@ -11,7 +12,7 @@ $offset = ($page - 1) * $limit;
 
 <?php
 if (isset($_GET['search']) && $_GET['search'] != '') {
-    $search = $_GET['search']; 
+    $search = $_GET['search'];
 
     $query = "SELECT * FROM alumni WHERE name LIKE '%$search%' OR course LIKE '%$search%' ORDER BY id DESC LIMIT $limit OFFSET $offset";
 
