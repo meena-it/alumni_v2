@@ -91,3 +91,20 @@ a:hover {
 .btn-edit:hover {
     background: #0056b3;
 }
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+    width:70%;
+    margin:30px auto;
+}
+
+.card{
+    background:#f4f4f4;
+    padding:25px;
+    text-align:center;
+    border-radius:12px;
+    box-shadow:0 0 8px rgba(0,0,0,.1);
+    font-size:18px;
+}

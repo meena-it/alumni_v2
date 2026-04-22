@@ -51,7 +51,7 @@ if (isset($_POST['login'])) {
 
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['name'];
-        $_SESSION['role']      = $row['role']; 
+        $_SESSION['role'] = $user['role'];
 
         header("Location: ../../index.php");
         exit();
