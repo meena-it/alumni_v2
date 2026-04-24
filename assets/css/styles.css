@@ -9,12 +9,25 @@ body
     padding: 10px;
 }
 
-.navbar a
-{
+.navbar a {
     color: #825002;
     margin-right: 10px;
     font-weight: bold;
-    text-decoration: bold;
+    text-decoration: none;
+
+    padding: 8px 12px;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.navbar a.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.navbar a:hover {
+    background: #5ea9d6;
+    text-decoration: none;
 }
 
 table {
