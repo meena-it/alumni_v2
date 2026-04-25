@@ -68,8 +68,12 @@ $no_images = $alumni - $images;
         },
 
         options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
             plugins: {
                 title: {
+                    responsive: true,
                     display: true,
                     text: 'User Roles'
                 }
@@ -89,6 +93,9 @@ $no_images = $alumni - $images;
         },
 
         options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
             plugins: {
                 title: {
                     display: true,
