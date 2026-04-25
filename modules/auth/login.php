@@ -1,5 +1,5 @@
 <?php include "../../includes/header.php"; ?>
-<?php include "../../includes/footer.php"; ?>
+<?php include "../../includes/navbar.php"; ?>
 
 <h2>Login</h2>
 
