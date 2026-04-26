@@ -10,7 +10,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
     <a class="<?php echo ($current_page == 'alumni_list.php') ? 'active' : ''; ?>"
         href="/alumni_v2/modules/alumni/alumni_list.php">Alumni</a>
-    <a href="#">Forum</a>
+    <a href="/alumni_v2/modules/forum/forum.php">Forum</a>
     <a href="#">Jobs</a>
     <a href="#">Events</a>
     <a href="#">Gallery</a>
