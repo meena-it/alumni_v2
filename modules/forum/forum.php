@@ -1,4 +1,4 @@
-<?php 
+<?php
 include "../../includes/header.php";
 include "../../includes/navbar.php";
 include "../../config/database.php";
@@ -22,11 +22,13 @@ if (isset($_POST['post'])) {
     exit();
 }
 
-$result = mysqli_query($conn, 
-"SELECT forum_posts.*, users.name 
+$result = mysqli_query(
+    $conn,
+    "SELECT forum_posts.*, users.name 
 FROM forum_posts
 JOIN users ON forum_posts.user_id = users.id
-ORDER BY forum_posts.id DESC ");
+ORDER BY forum_posts.id DESC "
+);
 ?>
 
 <h2>Forum</h2>
@@ -34,24 +36,40 @@ ORDER BY forum_posts.id DESC ");
 <form method="POST">
     <input type="text" name="title" placeholder="Post title" required><br><br>
     <textarea name="content" rows="5" cols="50"
-    placeholder="Write something..." requried></textarea><br><br>
+        placeholder="Write something..." requried></textarea><br><br>
 
     <button type="submit" name="post">Post</button>
 </form>
 
 <hr>
 
-<?php while($row = mysqli_fetch_assoc($result)) { ?>
-<div class="card">
-    <h3><?php echo $row['title']; ?></h3>
-    <p><?php echo nl2br($row['content']); ?></p>
-    <small>
-        Posted by <?php echo $row['name']; ?>
-        on <?php echo $row['created_at']; ?>
-    </small>
-</div>
+<?php while ($row = mysqli_fetch_assoc($result)) { ?>
+    <div class="card">
+        <h3><?php echo $row['title']; ?></h3>
+        <p><?php echo nl2br($row['content']); ?></p>
+        <small>
+            Posted by <?php echo $row['name']; ?>
+            on <?php echo $row['created_at']; ?>
+        </small>
 
-<br>
+        <?php if ($row['user_id'] == $_SESSION['user_id']) { ?>
+
+            <a href="edit_post.php?id=<?php echo $row['id']; ?>">Edit</a>
+
+            |
+
+            <a href="delete_post.php?id=<?php echo $row['id']; ?>"
+                onclick="return confirm('Delete this post?')">
+                Delete
+            </a>
+
+        <?php } ?>
+
+
+    </div>
+
+
+    <br>
 
 <?php } ?>
 
