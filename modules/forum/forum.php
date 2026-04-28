@@ -9,6 +9,19 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
+if (isset($_POST['add_comment'])) {
+
+    $post_id = $_POST['post_id'];
+    $comment = $_POST['comment'];
+    $user_id = $_SESSION['user_id'];
+
+    mysqli_query($conn,
+    "INSERT INTO forum_comments (post_id, user_id, comment) VALUES ('$post_id', '$user_id', '$comment')");
+
+    header("Location: forum.php");
+    exit();
+}
+
 if (isset($_POST['post'])) {
 
     $title = $_POST['title'];
@@ -51,6 +64,51 @@ ORDER BY forum_posts.id DESC "
             Posted by <?php echo $row['name']; ?>
             on <?php echo $row['created_at']; ?>
         </small>
+
+
+
+        <form method="POST">
+            <input type="hidden" name="post_id"
+                value="<?php echo $row['id']; ?>">
+
+            <input type="text"
+                name="comment"
+                placeholder="Write a comment..."
+                required>
+
+            <button type="submit" name="add_comment">
+                Comment
+            </button>
+        </form>
+
+        <?php
+        $comments = mysqli_query(
+            $conn,
+            "SELECT forum_comments.*, users.name
+            FROM forum_comments
+            JOIN users ON forum_comments.user_id = users.id
+            WHERE post_id='{$row['id']}'
+            ORDER BY id ASC"
+        );
+        ?>
+
+        <?php while ($c = mysqli_fetch_assoc($comments)) { ?>
+
+            <div style="margin-left:20px; padding:8px; background:#f9f9f9; margin-top:5px;">
+
+                <strong><?php echo $c['name']; ?>:</strong>
+
+                <?php echo $c['comment']; ?>
+
+                <br>
+
+                <small><?php echo $c['created_at']; ?></small>
+
+            </div>
+
+        <?php } ?>
+
+
 
         <?php if ($row['user_id'] == $_SESSION['user_id']) { ?>
 
