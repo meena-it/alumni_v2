@@ -15,8 +15,10 @@ if (isset($_POST['add_comment'])) {
     $comment = $_POST['comment'];
     $user_id = $_SESSION['user_id'];
 
-    mysqli_query($conn,
-    "INSERT INTO forum_comments (post_id, user_id, comment) VALUES ('$post_id', '$user_id', '$comment')");
+    mysqli_query(
+        $conn,
+        "INSERT INTO forum_comments (post_id, user_id, comment) VALUES ('$post_id', '$user_id', '$comment')"
+    );
 
     header("Location: forum.php");
     exit();
@@ -66,6 +68,17 @@ ORDER BY forum_posts.id DESC "
         </small>
 
 
+       <?php if ($row['user_id'] == $_SESSION['user_id']) { ?>
+
+            <a href="edit_post.php?id=<?php echo $row['id']; ?>">Edit</a>
+
+            |
+
+            <a href="delete_post.php?id=<?php echo $row['id']; ?>"
+                onclick="return confirm('Delete this post?')">
+                Delete
+            </a>
+        <?php } ?>
 
         <form method="POST">
             <input type="hidden" name="post_id"
@@ -105,27 +118,21 @@ ORDER BY forum_posts.id DESC "
                 <small><?php echo $c['created_at']; ?></small>
 
             </div>
+            <?php if ($c['user_id'] == $_SESSION['user_id']) { ?>
+
+                <a href="edit_comment.php?id=<?php echo $c['id']; ?>">Edit</a>
+
+                |
+
+                <a href="delete_comment.php?id=<?php echo $c['id']; ?>"
+                    onclick="return confirm('Delete comment?')">
+                    Delete
+                </a>
+
+            <?php } ?>
 
         <?php } ?>
-
-
-
-        <?php if ($row['user_id'] == $_SESSION['user_id']) { ?>
-
-            <a href="edit_post.php?id=<?php echo $row['id']; ?>">Edit</a>
-
-            |
-
-            <a href="delete_post.php?id=<?php echo $row['id']; ?>"
-                onclick="return confirm('Delete this post?')">
-                Delete
-            </a>
-
-        <?php } ?>
-
-
     </div>
-
 
     <br>
 
