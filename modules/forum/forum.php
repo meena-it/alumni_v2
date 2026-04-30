@@ -24,6 +24,39 @@ if (isset($_POST['add_comment'])) {
     exit();
 }
 
+if (isset($_GET['like'])) {
+
+    $post_id = $_GET['like'];
+    $user_id = $_SESSION['user_id'];
+
+    // Check if already liked
+    $check = mysqli_query(
+        $conn,
+        "SELECT * FROM forum_likes
+         WHERE post_id='$post_id' AND user_id='$user_id'"
+    );
+
+    if (mysqli_num_rows($check) > 0) {
+        // Unlike
+        mysqli_query(
+            $conn,
+            "DELETE FROM forum_likes
+         WHERE post_id='$post_id' AND user_id='$user_id'"
+        );
+    } else {
+        // Like
+        mysqli_query(
+            $conn,
+            "INSERT INTO forum_likes (post_id, user_id)
+         VALUES ('$post_id', '$user_id')"
+        );
+    }
+
+    header("Location: forum.php");
+    exit();
+}
+
+
 if (isset($_POST['post'])) {
 
     $title = $_POST['title'];
@@ -68,7 +101,34 @@ ORDER BY forum_posts.id DESC "
         </small>
 
 
-       <?php if ($row['user_id'] == $_SESSION['user_id']) { ?>
+        <?php
+        $post_id = $row['id'];
+
+        // Count likes
+        $count_result = mysqli_query(
+            $conn,
+            "SELECT COUNT(*) AS total FROM forum_likes WHERE post_id='$post_id'"
+        );
+        $like_count = mysqli_fetch_assoc($count_result)['total'];
+
+        // Check if current user liked
+        $user_id = $_SESSION['user_id'];
+        $liked_result = mysqli_query(
+            $conn,
+            "SELECT * FROM forum_likes WHERE post_id='$post_id' AND user_id='$user_id'"
+        );
+        $is_liked = mysqli_num_rows($liked_result) > 0;
+        ?>
+
+        <p>
+            👍 <?php echo $like_count; ?> Likes
+
+            <a href="forum.php?like=<?php echo $post_id; ?>">
+                <?php echo $is_liked ? "Unlike" : "Like"; ?>
+            </a>
+        </p>
+
+        <?php if ($row['user_id'] == $_SESSION['user_id']) { ?>
 
             <a href="edit_post.php?id=<?php echo $row['id']; ?>">Edit</a>
 
