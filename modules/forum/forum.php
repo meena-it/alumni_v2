@@ -121,18 +121,19 @@ ORDER BY forum_posts.id DESC "
         ?>
 
         <p>
-            👍 <?php echo $like_count; ?> Likes
-
-            <a href="forum.php?like=<?php echo $post_id; ?>">
+            <button onclick="toggleLike(<?php echo $post_id; ?>, this)">
                 <?php echo $is_liked ? "Unlike" : "Like"; ?>
-            </a>
+            </button>
+
+            <span id="like-count-<?php echo $post_id; ?>">
+                👍 <?php echo $like_count; ?>
+            </span>
+
         </p>
 
         <?php if ($row['user_id'] == $_SESSION['user_id']) { ?>
 
             <a href="edit_post.php?id=<?php echo $row['id']; ?>">Edit</a>
-
-            |
 
             <a href="delete_post.php?id=<?php echo $row['id']; ?>"
                 onclick="return confirm('Delete this post?')">
@@ -197,5 +198,35 @@ ORDER BY forum_posts.id DESC "
     <br>
 
 <?php } ?>
+
+<script>
+    function toggleLike(postId, btn) {
+
+        fetch('like_post.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'post_id=' + postId
+            })
+            .then(response => response.json())
+            .then(data => {
+
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                //Update button text
+                btn.innerText = data.liked ? "Unlike" : "Like";
+
+                //Update like count
+                document.getElementById('like-count-' + postId)
+                    .innerText = "👍 " + data.count;
+            });
+    }
+</script>
+
+
 
 <?php include "../../includes/footer.php"; ?>
